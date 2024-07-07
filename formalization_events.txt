@@ -1,0 +1,86 @@
+1. Тип Клик (click)
+- Элементы: film, trailer, category, actor, new films, serials, comedy
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+Типы данных:
+type: str
+element: str
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'type': 'click', 'element': 'film', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+
+2. Тип Страница (page)
+- Url страниц:  http://movies, http://genres, http://persons, http://actor
+- Время посещения в секундах: 26, 50344, 8923, 456033
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+Типы данных:
+type: str
+url: str
+time: int
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'type': 'page', 'url': 'http://movies/api/v1:8000', 'time': 22345, 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+
+3. Тип Смена качества видео (film_quality)
+- Фильм: Интерстеллар (2014), Зеленая миля (1999), Побег из Шоушенка (1994), Бойцовский клуб (1999)
+- Id фильма: 4896c91b-9e61-3129-87b6-8aa299028058, 29be0ee3-fe77-331e-a1bf-9494ec18c0ba, 29be0ee3-fe77-331e-a1bf-9494ec18c0ba
+- Качество видео: 1080p, 720p, 480p, 360p, 240p, 144p
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+Типы данных:
+type: str
+id_film: str
+film: str
+original_quality: int
+updated_quality: int
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'type': 'film_quality', 'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', film': 'Интерстеллар (2014)', 'original_quality': 720, 'updated_quality': 1080, 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+
+4. Тип Просмотр видео до конца (film_watched)
+- Фильм: Интерстеллар (2014), Зеленая миля (1999), Побег из Шоушенка (1994), Бойцовский клуб (1999)
+- Id фильма: 4896c91b-9e61-3129-87b6-8aa299028058, 29be0ee3-fe77-331e-a1bf-9494ec18c0ba, 29be0ee3-fe77-331e-a1bf-9494ec18c0ba
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+type: str
+id_film: str
+film: str
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'type': 'film_watched', 'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', film': 'Интерстеллар (2014)', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+
+5. Тип Фильтры поиска (search filter)
+- Фильтр: genre, actor, film, rating
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+type: str
+filter: str
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'type': 'search filter', 'filter': 'genre', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
