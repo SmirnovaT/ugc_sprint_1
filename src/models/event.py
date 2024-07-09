@@ -20,12 +20,12 @@ class BaseEvent(BaseModel):
     fingerprint: str
 
 
-EVENT_TYPE_CLASS_MAP: dict[EventsEnum, type[BaseEvent]] = {}
+EVENT_REGISTRY: dict[EventsEnum, type[BaseEvent]] = {}
 
 
 def register_event(event_type: EventsEnum):
     def decorator(event_class):
-        EVENT_TYPE_CLASS_MAP[event_type] = event_class
+        EVENT_REGISTRY[event_type] = event_class
         return event_class
 
     return decorator

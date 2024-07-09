@@ -1,6 +1,6 @@
 from pydantic import ValidationError
 
-from models.event import EVENT_TYPE_CLASS_MAP, BaseEvent
+from models.event import EVENT_REGISTRY, BaseEvent
 from repositories.event import BaseEventRepo, get_rabbit_event_repo
 from schemas.events import EventIn
 
@@ -39,7 +39,7 @@ class EventService:
         except ValidationError as e:
             raise EventValidationError(detail=e.errors()) from e
 
-        EventModel = EVENT_TYPE_CLASS_MAP.get(base_event.type)
+        EventModel = EVENT_REGISTRY.get(base_event.type)
         if not EventModel:
             raise EventTypeError
 
