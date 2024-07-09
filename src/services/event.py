@@ -16,7 +16,7 @@ class EventValidationError(EventBaseError):
     """Ошибка валидации"""
 
 
-class EventTypeError(EventBaseError):
+class EventTypeError(EventValidationError):
     """Незарегистрированный тип события"""
 
     def __init__(self) -> None:

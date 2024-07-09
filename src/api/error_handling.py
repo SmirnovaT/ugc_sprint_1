@@ -3,15 +3,15 @@ from http import HTTPStatus
 from flask import Flask, json
 from werkzeug.exceptions import HTTPException
 
-from services.event import EventBaseError
+from services.event import EventValidationError
 
 
 def handle_exceptions(e):
     """Обработка ошибок для Flask"""
 
     match e:
-        case EventBaseError():
-            return {"detail": e.detail}, HTTPStatus.BAD_REQUEST
+        case EventValidationError():
+            return {"detail": e.detail}, HTTPStatus.UNPROCESSABLE_ENTITY
 
         case HTTPException():
             response = e.get_response()
