@@ -14,7 +14,6 @@ class RolesEnum(StrEnum):
 
 
 class BaseEvent(BaseModel):
-    # TODO: ENUM
     type: RolesEnum
     timestamp: datetime
     user_id: UUID | None

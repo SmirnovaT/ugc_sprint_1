@@ -1,8 +1,8 @@
-
 from pydantic import ValidationError
 
 from models.event import EVENT_TYPE_CLASS_MAP, BaseEvent
 from repositories.event import BaseEventRepo, get_rabbit_event_repo
+from schemas.events import EventIn
 
 
 class EventBaseError(Exception):
@@ -28,8 +28,14 @@ class EventService:
         self.event_repo = event_repo
 
     async def process_event(self, event: dict) -> None:
+        # TODO: валидацию схемы запроса вынести в слой view/использовать библиотеку?
         try:
-            base_event = BaseEvent.model_validate(event)
+            EventIn.model_validate(event).event
+        except ValidationError as e:
+            raise EventValidationError(detail=e.errors()) from e
+
+        try:
+            base_event = BaseEvent.model_validate(event["event"])
         except ValidationError as e:
             raise EventValidationError(detail=e.errors()) from e
 
@@ -38,7 +44,7 @@ class EventService:
             raise EventTypeError
 
         try:
-            specific_event = EventModel.model_validate(event)
+            specific_event = EventModel.model_validate(event["event"])
         except ValidationError as e:
             raise EventValidationError(detail=e.errors) from e
         await self.event_repo.send_event(specific_event)

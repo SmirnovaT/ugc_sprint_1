@@ -2,13 +2,9 @@ from http import HTTPStatus
 
 from flask import Blueprint, Response, request
 
-from services.event import EventBaseError, EventService, get_event_service
+from services.event import EventService, get_event_service
 
 router = Blueprint("events", __name__, url_prefix="/events")
-
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 @router.post("/")
