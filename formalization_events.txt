@@ -1,21 +1,23 @@
 1. Тип Клик (click)
 - Элементы: film, trailer, category, actor, new films, serials, comedy
+- Url страницы: http://film, http://trailer, http://actor, http://comedy
 - Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
 - Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
 - Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
 
 Типы данных:
 type: str
+url: str
 element: str
 timestamp: datetime
 user_id: str | None
 fingerprint: str
 
 Пример:
-{'type': 'click', 'element': 'film', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+{'event': {'type': 'click', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'element': 'film', 'url': 'http://film'}}}
 
-2. Тип Страница (page)
-- Url страниц:  http://movies, http://genres, http://persons, http://actor
+2. Тип Время просмотра страницы (page_view_time)
+- Url страницы:  http://movies, http://genres, http://persons, http://actor
 - Время посещения в секундах: 26, 50344, 8923, 456033
 - Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
 - Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
@@ -30,7 +32,7 @@ user_id: str | None
 fingerprint: str
 
 Пример:
-{'type': 'page', 'url': 'http://movies/api/v1:8000', 'time': 22345, 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+{'event': {'type': 'page_view_time', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://movies/api/v1:8000', 'time': 22345}}}
 
 3. Тип Смена качества видео (film_quality)
 - Фильм: Интерстеллар (2014), Зеленая миля (1999), Побег из Шоушенка (1994), Бойцовский клуб (1999)
@@ -51,7 +53,7 @@ user_id: str | None
 fingerprint: str
 
 Пример:
-{'type': 'film_quality', 'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', film': 'Интерстеллар (2014)', 'original_quality': 720, 'updated_quality': 1080, 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+{'event': {'type': 'film_quality', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', 'film': 'Интерстеллар (2014)', 'original_quality': 720, 'updated_quality': 1080}}}
 
 4. Тип Просмотр видео до конца (film_watched)
 - Фильм: Интерстеллар (2014), Зеленая миля (1999), Побег из Шоушенка (1994), Бойцовский клуб (1999)
@@ -68,7 +70,7 @@ user_id: str | None
 fingerprint: str
 
 Пример:
-{'type': 'film_watched', 'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', film': 'Интерстеллар (2014)', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+{'event': {'type': 'film_watched', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', 'film': 'Интерстеллар (2014)'}}}
 
 5. Тип Фильтры поиска (search filter)
 - Фильтр: genre, actor, film, rating
@@ -83,4 +85,24 @@ user_id: str | None
 fingerprint: str
 
 Пример:
-{'type': 'search filter', 'filter': 'genre', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789'}
+{'event': {'type': 'search filter', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'filter': 'genre'}}}
+
+6. Тип Количество просмотров страницы за активную сессию(page_visits)
+- Url страницы:  http://movies, http://genres, http://persons, http://actor
+- Count: 1, 2, 10, 16
+- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
+- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
+- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
+
+Типы данных:
+type: str
+url: str
+count: int
+timestamp: datetime
+user_id: str | None
+fingerprint: str
+
+Пример:
+{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://movies', 'count': 14}}}
+{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://persons', 'count': 2}}}
+{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://actor', 'count': 2}}}
