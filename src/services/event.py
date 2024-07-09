@@ -1,6 +1,6 @@
 from pydantic import ValidationError
 
-from models.event import EVENT_REGISTRY, BaseEvent
+from models.event import EVENT_REGISTRY, BaseEvent, EventEnvelope
 from repositories.event import BaseEventRepo, get_rabbit_event_repo
 from schemas.events import EventIn
 
@@ -27,27 +27,23 @@ class EventService:
     def __init__(self, event_repo: BaseEventRepo) -> None:
         self.event_repo = event_repo
 
-    async def process_event(self, event: dict) -> None:
+    async def process_event(self, raw_event: dict) -> None:
         # TODO: валидацию схемы запроса вынести в слой view/использовать библиотеку?
         try:
-            EventIn.model_validate(event).event
+            event_envelope = EventEnvelope.model_validate(raw_event)
         except ValidationError as e:
             raise EventValidationError(detail=e.errors()) from e
 
-        try:
-            base_event = BaseEvent.model_validate(event["event"])
-        except ValidationError as e:
-            raise EventValidationError(detail=e.errors()) from e
-
+        base_event = event_envelope.event
         EventModel = EVENT_REGISTRY.get(base_event.type)
         if not EventModel:
             raise EventTypeError
 
         try:
-            specific_event = EventModel.model_validate(event["event"])
+            EventModel.model_validate(base_event.data)
         except ValidationError as e:
-            raise EventValidationError(detail=e.errors) from e
-        await self.event_repo.send_event(specific_event)
+            raise EventValidationError(detail=e.errors()) from e
+        await self.event_repo.send_event(event_envelope)
 
 
 def get_event_service():

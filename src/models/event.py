@@ -7,10 +7,11 @@ from pydantic import BaseModel
 
 class EventsEnum(StrEnum):
     CLICK = "click"
-    PAGE = "page"
-    CHANGE_QUALITY = "change_quality"
-    FILM_COMPLETED = "film_completed"
-    SEARCH_FILTER = "search_filter"
+    PAGE_VIEW_TIME = "page_view_time"
+    FILM_QUALITY = "film_quality"
+    FILM_WATCHED = "film_watched"
+    SEARCH_FILTER = "search filter"
+    PAGE_VISITS = "page_visits"
 
 
 class BaseEvent(BaseModel):
@@ -18,9 +19,14 @@ class BaseEvent(BaseModel):
     timestamp: datetime
     user_id: UUID | None
     fingerprint: str
+    data: dict
 
 
-EVENT_REGISTRY: dict[EventsEnum, type[BaseEvent]] = {}
+class EventEnvelope(BaseModel):
+    event: BaseEvent
+
+
+EVENT_REGISTRY: dict[EventsEnum, type[BaseModel]] = {}
 
 
 def register_event(event_type: EventsEnum):
@@ -32,27 +38,36 @@ def register_event(event_type: EventsEnum):
 
 
 @register_event(EventsEnum.CLICK)
-class ClickEvent(BaseEvent):
+class ClickEvent(BaseModel):
     element: str
 
 
-@register_event(EventsEnum.PAGE)
-class PageEvent(BaseEvent):
+@register_event(EventsEnum.PAGE_VIEW_TIME)
+class PageViewTimeEvent(BaseModel):
     url: str
+    time: int
 
 
-@register_event(EventsEnum.CHANGE_QUALITY)
-class ChangeQualityEvent(BaseEvent):
-    original_quality: str
-    updated_quality: str
+@register_event(EventsEnum.FILM_QUALITY)
+class FilmQualityEvent(BaseModel):
+    film: str
+    id_film: UUID
+    original_quality: int
+    updated_quality: int
 
 
-@register_event(EventsEnum.FILM_COMPLETED)
-class FilmCompletedEvent(BaseEvent):
-    film_id: UUID
+@register_event(EventsEnum.FILM_WATCHED)
+class FilmWatchedEvent(BaseModel):
+    id_film: UUID
     film: str
 
 
 @register_event(EventsEnum.SEARCH_FILTER)
-class SearchFilterEvent(BaseEvent):
+class SearchFilterEvent(BaseModel):
     filter: str
+
+
+@register_event(EventsEnum.PAGE_VISITS)
+class PageVisitsEvent(BaseModel):
+    url: str
+    count: int
