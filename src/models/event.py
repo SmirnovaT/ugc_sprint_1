@@ -5,7 +5,7 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
-class RolesEnum(StrEnum):
+class EventsEnum(StrEnum):
     CLICK = "click"
     PAGE = "page"
     CHANGE_QUALITY = "change_quality"
@@ -14,39 +14,45 @@ class RolesEnum(StrEnum):
 
 
 class BaseEvent(BaseModel):
-    type: RolesEnum
+    type: EventsEnum
     timestamp: datetime
     user_id: UUID | None
     fingerprint: str
 
 
+EVENT_TYPE_CLASS_MAP: dict[EventsEnum, type[BaseEvent]] = {}
+
+
+def register_event(event_type: EventsEnum):
+    def decorator(event_class):
+        EVENT_TYPE_CLASS_MAP[event_type] = event_class
+        return event_class
+
+    return decorator
+
+
+@register_event(EventsEnum.CLICK)
 class ClickEvent(BaseEvent):
     element: str
 
 
+@register_event(EventsEnum.PAGE)
 class PageEvent(BaseEvent):
     url: str
 
 
+@register_event(EventsEnum.CHANGE_QUALITY)
 class ChangeQualityEvent(BaseEvent):
     original_quality: str
     updated_quality: str
 
 
+@register_event(EventsEnum.FILM_COMPLETED)
 class FilmCompletedEvent(BaseEvent):
     film_id: UUID
     film: str
 
 
+@register_event(EventsEnum.SEARCH_FILTER)
 class SearchFilterEvent(BaseEvent):
     filter: str
-
-
-EVENT_TYPE_CLASS_MAP: dict[RolesEnum, type[BaseEvent]] = {
-    RolesEnum.CLICK: ClickEvent,
-    RolesEnum.CHANGE_QUALITY: ChangeQualityEvent,
-    RolesEnum.PAGE: PageEvent,
-    RolesEnum.CHANGE_QUALITY: ChangeQualityEvent,
-    RolesEnum.FILM_COMPLETED: FilmCompletedEvent,
-    RolesEnum.SEARCH_FILTER: SearchFilterEvent,
-}
