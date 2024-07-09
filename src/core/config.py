@@ -1,15 +1,8 @@
-from logging import config as logging_config
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from core.logger import LOGGING
-
-logging_config.dictConfig(LOGGING)
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 
 
 class Settings(BaseSettings):

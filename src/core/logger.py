@@ -1,60 +1,52 @@
-import logging.config
-
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-LOG_DEFAULT_HANDLERS = [
-    "console",
-]
+LOG_DEFAULT_HANDLERS = ["console"]
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {"format": LOG_FORMAT},
-        "default": {
-            "()": "uvicorn.logging.DefaultFormatter",
-            "fmt": "%(levelprefix)s %(message)s",
-            "use_colors": None,
-        },
-        "access": {
-            "()": "uvicorn.logging.AccessFormatter",
-            "fmt": "%(levelprefix)s %(client_addr)s - '%(request_line)s' %(status_code)s",
+        "default": {"format": LOG_FORMAT},
+        "gunicorn": {
+            "format": "%(asctime)s [%(process)d] [%(levelname)s] %(message)s",
+            "datefmt": "[%Y-%m-%d %H:%M:%S %z]",
+            "class": "logging.Formatter",
         },
     },
     "handlers": {
         "console": {
-            "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "verbose",
+            "formatter": "default",
+            "stream": "ext://sys.stdout",
+            "level": "INFO",
+        },
+        "error_console": {
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "stream": "ext://sys.stderr"
         },
         "default": {
+            "class": "logging.StreamHandler",
             "formatter": "default",
-            "class": "logging.StreamHandler",
             "stream": "ext://sys.stdout",
-        },
-        "access": {
-            "formatter": "access",
-            "class": "logging.StreamHandler",
-            "stream": "ext://sys.stdout",
+            "level": "INFO",
         },
     },
-    # TODO: будем ли мы использовать uvicorn?
     "loggers": {
         "": {
             "handlers": LOG_DEFAULT_HANDLERS,
             "level": "INFO",
         },
-        "uvicorn.error": {
+        "gunicorn.error": {
             "level": "INFO",
+            "handlers": ["error_console"],
+            "propagate": True,
+            "qualname": "gunicorn.error",
         },
-        "uvicorn.access": {
-            "handlers": ["access"],
-            "level": "INFO",
-            "propagate": False,
-        },
+        "gunicorn.access": {"level": "INFO", "handlers": ["console"], "propagate": True, "qualname": "gunicorn.access"},
     },
     "root": {
         "level": "INFO",
-        "formatter": "verbose",
+        "formatter": "default",
         "handlers": LOG_DEFAULT_HANDLERS,
     },
 }
