@@ -1,5 +1,14 @@
 services:
 
+  ugc-service:
+    build:
+      context: .
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - rabbitmq
+
   # ------- RabbitMQ ------ #
   rabbitmq:
     image: rabbitmq:3.10.7-management

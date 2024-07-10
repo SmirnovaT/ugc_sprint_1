@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "ugc-service"
+version = "0.1.0"
+description = "Online cinema UGC service"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.ruff]
+src = ["src"]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = { extras = ["async"], version = "^3.0.3" }
+pydantic = "^2.8.2"
+pydantic-settings = "^2.3.4"
+orjson = "^3.10.6"
+
+[tool.poetry.group.prod]
+optional = true
+
+[tool.poetry.group.prod.dependencies]
+gunicorn = {extras = ["gevent"], version = "^22.0.0"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

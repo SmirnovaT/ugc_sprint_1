@@ -104,3 +104,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+# ruff Python linter
+.ruff_cache/
+
+rabbitmq

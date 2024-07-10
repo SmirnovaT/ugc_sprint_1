@@ -2,3 +2,7 @@ services:
   rabbitmq:
     ports:
       - 15672:15672
+
+  ugc-service:
+    ports:
+      - 8000:${APP_PORT}
