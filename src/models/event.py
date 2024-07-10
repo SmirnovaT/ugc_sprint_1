@@ -10,7 +10,7 @@ class EventsEnum(StrEnum):
     PAGE_VIEW_TIME = "page_view_time"
     FILM_QUALITY = "film_quality"
     FILM_WATCHED = "film_watched"
-    SEARCH_FILTER = "search filter"
+    SEARCH_FILTER = "search_filter"
     PAGE_VISITS = "page_visits"
 
 

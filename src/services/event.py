@@ -1,8 +1,7 @@
 from pydantic import ValidationError
 
-from models.event import EVENT_REGISTRY, BaseEvent, EventEnvelope
-from repositories.event import BaseEventRepo, get_rabbit_event_repo
-from schemas.events import EventIn
+from models.event import EVENT_REGISTRY, EventEnvelope
+from repositories.event import BaseEventRepo, get_kafka_event_repo
 
 
 class EventBaseError(Exception):
@@ -47,5 +46,5 @@ class EventService:
 
 
 def get_event_service():
-    rabbit_event_repo = get_rabbit_event_repo()
-    return EventService(event_repo=rabbit_event_repo)
+    kafka_event_repo = get_kafka_event_repo()
+    return EventService(event_repo=kafka_event_repo)

@@ -10,6 +10,7 @@ class Settings(BaseSettings):
 
     project_name: str = "ugc_service"
     app_port: int = 8000
+    api_url: str
 
     model_config = SettingsConfigDict(
         extra="ignore",

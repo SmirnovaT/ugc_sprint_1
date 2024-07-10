@@ -11,8 +11,8 @@ class BaseEventRepo(ABC):
         """Метод для отправки события в брокер/хранилище"""
 
 
-class RabbitEventRepo(BaseEventRepo):
-    """Репозиторий аналитических событий использующий RabbitMQ в качестве брокера"""
+class KafkaEventRepo(BaseEventRepo):
+    """Репозиторий аналитических событий использующий Kafka в качестве брокера"""
 
     def __init__(self) -> None:
         super().__init__()
@@ -23,5 +23,5 @@ class RabbitEventRepo(BaseEventRepo):
         print(event.model_dump)
 
 
-def get_rabbit_event_repo() -> RabbitEventRepo:
-    return RabbitEventRepo()
+def get_kafka_event_repo() -> KafkaEventRepo:
+    return KafkaEventRepo()
