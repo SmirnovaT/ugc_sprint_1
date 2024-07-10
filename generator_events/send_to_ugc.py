@@ -25,7 +25,7 @@ event_functions = [
 def send_event(event: dict) -> None:
     """Функция отправки сгенерированных событий в ручку '/analytics_event'"""
 
-    requests.post(settings.api_ur, json=event, timeout=15)
+    requests.post(settings.api_url, json=event, timeout=15)
 
 
 if __name__ == "__main__":
