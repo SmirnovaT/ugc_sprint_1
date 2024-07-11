@@ -79,7 +79,10 @@ def generate_page_visits() -> dict:
 
     return generate_event(
         "page_visits",
-        {"url": f"http://online-cinema/{fake.uri_path()}", "count": random.randint(1, 100)},
+        {
+            "url": f"http://online-cinema/{fake.uri_path()}",
+            "count": random.randint(1, 100),
+        },
     )
 
 
@@ -87,7 +90,7 @@ def generate_search_filter() -> dict:
     """Генерация данных для события 'Фильтры поиска'"""
 
     return generate_event(
-        "search filter",
+        "search_filter",
         {
             "filter": fake.word(
                 ext_word_list=["genre", "rating", "year", "actor", "film"]

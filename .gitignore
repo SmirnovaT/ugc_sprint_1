@@ -106,5 +106,3 @@ coverage.xml
 
 # ruff Python linter
 .ruff_cache/
-
-rabbitmq

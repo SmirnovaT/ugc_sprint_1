@@ -1,20 +1,13 @@
 services:
 
+  # ------- ugc-service ------ #
   ugc-service:
     build:
       context: .
     env_file:
       - .env
     restart: always
-    depends_on:
-      - rabbitmq
+#    depends_on:
+#      - kafka
 
-  # ------- RabbitMQ ------ #
-  rabbitmq:
-    image: rabbitmq:3.10.7-management
-    hostname: rabbitmq
-    restart: always
-    environment:
-      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: -rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
-    volumes:
-      - ./rabbitmq:/var/lib/rabbitmq
+  # ------- Kafka ------ #
