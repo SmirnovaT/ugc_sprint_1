@@ -1,8 +1,8 @@
 from logging import config as logging_config
 
 import orjson
-from flask import Flask
 from flask.json.provider import JSONProvider
+from flask_openapi3 import OpenAPI
 
 from api.error_handling import setup_error_handling
 from api.router import api_router
@@ -21,18 +21,19 @@ class OrJSONProvider(JSONProvider):
         return orjson.loads(s)
 
 
-def create_app() -> Flask:
+def create_app() -> OpenAPI:
     logging_config.dictConfig(LOGGING)
 
-    app = Flask(__name__)
+    app = OpenAPI(__name__)
 
     app.json = OrJSONProvider(app)
-    app.register_blueprint(api_router)
+    app.register_api(api_router)
     setup_error_handling(app)
     return app
 
 
 app = create_app()
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=settings.app_port)

@@ -26,13 +26,7 @@ class EventService:
     def __init__(self, event_repo: BaseEventRepo) -> None:
         self.event_repo = event_repo
 
-    async def process_event(self, raw_event: dict) -> None:
-        # TODO: валидацию схемы запроса вынести в слой view/использовать библиотеку?
-        try:
-            event_envelope = EventEnvelope.model_validate(raw_event)
-        except ValidationError as e:
-            raise EventValidationError(detail=e.errors()) from e
-
+    async def process_event(self, event_envelope: EventEnvelope) -> None:
         base_event = event_envelope.event
         EventModel = EVENT_REGISTRY.get(base_event.type)
         if not EventModel:
@@ -45,6 +39,6 @@ class EventService:
         await self.event_repo.send_event(event_envelope)
 
 
-def get_event_service():
+def get_event_service() -> EventService:
     kafka_event_repo = get_kafka_event_repo()
     return EventService(event_repo=kafka_event_repo)
