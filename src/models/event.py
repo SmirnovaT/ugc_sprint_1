@@ -11,7 +11,6 @@ class EventsEnum(StrEnum):
     FILM_QUALITY = "film_quality"
     FILM_WATCHED = "film_watched"
     SEARCH_FILTER = "search_filter"
-    PAGE_VISITS = "page_visits"
 
 
 class BaseEvent(BaseModel):
@@ -65,9 +64,3 @@ class FilmWatchedEvent(BaseModel):
 @register_event(EventsEnum.SEARCH_FILTER)
 class SearchFilterEvent(BaseModel):
     filter: str
-
-
-@register_event(EventsEnum.PAGE_VISITS)
-class PageVisitsEvent(BaseModel):
-    url: str
-    count: int
