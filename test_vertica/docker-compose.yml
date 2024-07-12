@@ -1,0 +1,15 @@
+
+services:
+
+  vertica:
+    image: jbfavre/vertica:latest
+    environment:
+      VERTICA_PASSWORD: ${VERTICA_PASSWORD}
+      VERTICA_DBADMIN_PASSWORD: ${VERTICA_DBADMIN_PASSWORD}
+      VERTICA_USER: ${VERTICA_USER}
+      VERTICA_DATABASE: ${VERTICA_DATABASE}
+      ports:
+        - "5433:5433"
+    restart: always
+
+
