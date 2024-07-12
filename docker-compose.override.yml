@@ -10,3 +10,11 @@ services:
   kafka:
     ports:
       - "9092:9092"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.0
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS=kafka:29092
+      - KAFKA_CLUSTERS_0_NAME=kafka-cluster

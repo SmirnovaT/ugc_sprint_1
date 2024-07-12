@@ -1,3 +1,4 @@
+import logging
 from http import HTTPStatus
 
 from flask import Flask, json
@@ -5,6 +6,7 @@ from werkzeug.exceptions import HTTPException
 
 from services.event import EventValidationError
 
+logger = logging.getLogger(__name__)
 
 def handle_exceptions(e):
     """Обработка ошибок для Flask"""
@@ -25,6 +27,7 @@ def handle_exceptions(e):
             return response
 
         case _:
+            logging.exception("unhandled exception")
             return {"detail": "internal server error"}, HTTPStatus.INTERNAL_SERVER_ERROR
 
 
