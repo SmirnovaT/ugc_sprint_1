@@ -73,7 +73,7 @@ fingerprint: str
 {'event': {'type': 'film_watched', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'id_film': '4896c91b-9e61-3129-87b6-8aa299028058', 'film': 'Интерстеллар (2014)'}}}
 
 5. Тип Фильтры поиска (search_filter)
-- Фильтр: genre, actor, film, rating
+- Фильтр: genre=thriller, actor=Брэд Пит, film=Большая Игра, rating=8
 - Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
 - Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
 - Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789

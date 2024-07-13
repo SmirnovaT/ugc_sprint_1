@@ -8,7 +8,6 @@ from generator_events.events import (
     generate_film_quality,
     generate_film_watched,
     generate_page_view_time,
-    generate_page_visits,
     generate_search_filter,
 )
 
@@ -17,7 +16,6 @@ event_functions = [
     generate_film_quality,
     generate_film_watched,
     generate_page_view_time,
-    generate_page_visits,
     generate_search_filter,
 ]
 

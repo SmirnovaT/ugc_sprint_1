@@ -74,18 +74,6 @@ def generate_page_view_time() -> dict:
     )
 
 
-def generate_page_visits() -> dict:
-    """Генерация данных для события 'Количество просмотров страницы за активную сессию'"""
-
-    return generate_event(
-        "page_visits",
-        {
-            "url": f"http://online-cinema/{fake.uri_path()}",
-            "count": random.randint(1, 100),
-        },
-    )
-
-
 def generate_search_filter() -> dict:
     """Генерация данных для события 'Фильтры поиска'"""
 
@@ -93,7 +81,7 @@ def generate_search_filter() -> dict:
         "search_filter",
         {
             "filter": fake.word(
-                ext_word_list=["genre", "rating", "year", "actor", "film"]
+                ext_word_list=["genre=thriller", "actor=Брэд Пит", "film=Большая Игра", "rating=8"]
             )
         },
     )

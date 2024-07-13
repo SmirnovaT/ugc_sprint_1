@@ -1,8 +1,15 @@
 from pathlib import Path
 
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+
+class KafkaSettings(BaseModel):
+    host: str
+    port: int
+    topic: str
 
 
 class Settings(BaseSettings):
@@ -10,6 +17,7 @@ class Settings(BaseSettings):
 
     project_name: str = "ugc_service"
     app_port: int = 8000
+    kafka: KafkaSettings
     api_url: str
 
     model_config = SettingsConfigDict(
