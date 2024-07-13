@@ -1,9 +1,10 @@
 import time
+
 import vertica_python
 
 from generator_events.generate_to_db import generate_events
 from test_vertica.config import connection_info
-from test_utils import time_it, transform_data
+from test_utils import time_it
 
 TOTAL = 1000
 BATCH_SIZE = 1000
@@ -12,7 +13,6 @@ BATCH_SIZE = 1000
 
 def create_table():
     """Создание таблицы в БД"""
-
     with vertica_python.connect(**connection_info) as connection:
         cursor = connection.cursor()
 
@@ -41,11 +41,12 @@ def insert_events(values):
         connection.commit()
 
 
-@time_it
+@time_it(TOTAL)
 def transform_data(event_generator):
     """Преобразование данных и вставка в БД"""
 
     for batch in event_generator:
+
         values = [
             (event['type'],
              event['timestamp'],
@@ -59,7 +60,7 @@ def transform_data(event_generator):
         insert_events(values)
 
 
-@time_it
+@time_it(TOTAL)
 def get_events(limit):
     """Получение всех записей из таблицы"""
 
@@ -72,7 +73,7 @@ def get_events(limit):
             print(row)
 
 
-@time_it
+@time_it(TOTAL)
 def update_events(limit):
     """Обновление 100000 записей"""
 

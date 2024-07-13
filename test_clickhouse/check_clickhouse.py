@@ -8,9 +8,11 @@ BATCH_SIZE = 10
 
 @time_it
 def insert_events(values):
-    client.execute(f"""
+    for value in values:
+        print("Количество значений в строке: ", len(value))
+        client.execute(f"""
                 INSERT INTO event (type, timestamp, user_id, fingerprint, element, url)
-                VALUES ({values[0]}, {values[1]}, {values[2]}, {values[3]}, {values[4]}, {values[5]})""")
+                VALUES ({value[0]}, {value[1]}, {value[2]}, {value[3]}, {value[4]}, {value[5]})""")
 
 @time_it
 def get_events(limit):
