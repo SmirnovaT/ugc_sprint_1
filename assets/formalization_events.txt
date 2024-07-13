@@ -85,24 +85,4 @@ user_id: str | None
 fingerprint: str
 
 Пример:
-{'event': {'type': 'search_filter', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'filter': 'genre'}}}
-
-6. Тип Количество просмотров страницы за активную сессию(page_visits)
-- Url страницы:  http://movies, http://genres, http://persons, http://actor
-- Count: 1, 2, 10, 16
-- Временная метка, когда произошло событие: 2023-11-07 18:07:29.739228+03:00
-- Пользователь: a1b2c3d4-e5f6-7890-1234-567890abcdef
-- Фингерпринт : Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789
-
-Типы данных:
-type: str
-url: str
-count: int
-timestamp: datetime
-user_id: str | None
-fingerprint: str
-
-Пример:
-{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://movies', 'count': 14}}}
-{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://persons', 'count': 2}}}
-{'event': {'type': 'page_visits', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'url': 'http://actor', 'count': 2}}}
+{'event': {'type': 'search_filter', 'timestamp': '2023-11-07 18:07:29.739228+03:00', 'user_id': 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'fingerprint': 'Chrome/117.0.5938.132 Safari/537.36; Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36; 1920x1080; UTC+3; en-US; Windows; 123456789', 'data': {'filter': 'genre=thriller'}}}
