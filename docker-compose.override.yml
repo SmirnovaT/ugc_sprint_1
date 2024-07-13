@@ -34,7 +34,8 @@ services:
       - "8125:8123"
       - "9002:9000"
 
-    clickhouse-node4:
-      ports:
-        - "8126:8123"
-        - "9003:9000"
+  clickhouse-node4:
+    ports:
+      - "8126:8123"
+      - "9003:9000"
+
