@@ -3,25 +3,11 @@ import vertica_python
 
 from generator_events.generate_to_db import generate_events
 from test_vertica.config import connection_info
+from test_utils import time_it, transform_data
 
 TOTAL = 1000
 BATCH_SIZE = 1000
 
-
-def time_it(func):
-    """Декоратор, измеряющий время выполнения функции"""
-
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        execution_time = (end_time - start_time)
-        speed_time = (execution_time / TOTAL)
-        print(f"Скорость обработки {TOTAL} записей: {execution_time} секунд")
-        print(f"Средняя скорость обработки одной записи из {TOTAL} записей: {speed_time} секунд")
-        return result
-
-    return wrapper
 
 
 def create_table():
@@ -114,7 +100,7 @@ def drop_events():
 if __name__ == "__main__":
     create_table()
     event_generator = generate_events(count=TOTAL, batch_size=BATCH_SIZE)
-    transform_data(event_generator)
+    transform_data(event_generator, insert_events)
     get_events(limit=TOTAL)
     update_events(limit=TOTAL)
     drop_events()
