@@ -18,3 +18,24 @@ services:
     environment:
       - KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS=kafka:29092
       - KAFKA_CLUSTERS_0_NAME=kafka-cluster
+
+  clickhouse-node1:
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+
+  clickhouse-node2:
+    ports:
+      - "8124:8123"
+      - "9001:9000"
+
+  clickhouse-node3:
+    ports:
+      - "8125:8123"
+      - "9002:9000"
+
+  clickhouse-node4:
+    ports:
+      - "8126:8123"
+      - "9003:9000"
+

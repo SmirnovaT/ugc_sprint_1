@@ -1,36 +1,20 @@
-import time
 import vertica_python
 
 from generator_events.generate_to_db import generate_events
-from test_vertica.config import connection_info
+from test_db.test_vertica.config import connection_info
+from test_db.test_utils.utils import time_it
 
 TOTAL = 1000
 BATCH_SIZE = 1000
 
 
-def time_it(func):
-    """Декоратор, измеряющий время выполнения функции"""
-
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        execution_time = (end_time - start_time)
-        speed_time = (execution_time / TOTAL)
-        print(f"Скорость обработки {TOTAL} записей: {execution_time} секунд")
-        print(f"Средняя скорость обработки одной записи из {TOTAL} записей: {speed_time} секунд")
-        return result
-
-    return wrapper
-
-
 def create_table():
     """Создание таблицы в БД"""
-
     with vertica_python.connect(**connection_info) as connection:
         cursor = connection.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         CREATE TABLE IF NOT EXISTS event (
             id IDENTITY,
             type VARCHAR NOT NULL,
@@ -38,7 +22,8 @@ def create_table():
             user_id VARCHAR NOT NULL,
             fingerprint VARCHAR(256) NOT NULL,
             element VARCHAR NOT NULL,
-            url VARCHAR NOT NULL)""")
+            url VARCHAR NOT NULL)"""
+        )
 
 
 def insert_events(values):
@@ -55,25 +40,28 @@ def insert_events(values):
         connection.commit()
 
 
-@time_it
+@time_it(TOTAL)
 def transform_data(event_generator):
     """Преобразование данных и вставка в БД"""
 
     for batch in event_generator:
+
         values = [
-            (event['type'],
-             event['timestamp'],
-             event['user_id'],
-             event['fingerprint'],
-             event['element'],
-             event['url'])
+            (
+                event["type"],
+                event["timestamp"],
+                event["user_id"],
+                event["fingerprint"],
+                event["element"],
+                event["url"],
+            )
             for event in batch
         ]
 
         insert_events(values)
 
 
-@time_it
+@time_it(TOTAL)
 def get_events(limit):
     """Получение всех записей из таблицы"""
 
@@ -86,7 +74,7 @@ def get_events(limit):
             print(row)
 
 
-@time_it
+@time_it(TOTAL)
 def update_events(limit):
     """Обновление 100000 записей"""
 
