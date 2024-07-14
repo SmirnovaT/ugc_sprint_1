@@ -3,7 +3,7 @@ import logging
 from clickhouse_driver import Client
 
 from generator_events.generate_to_db import generate_events
-from test_utils.utils import time_it
+from test_db.test_utils.utils import time_it
 
 TOTAL =10000000
 BATCH_SIZE = 100000

@@ -1,5 +1,4 @@
 import time
-import logging
 
 def time_it(TOTAL):
     """Декоратор, измеряющий время выполнения функции"""

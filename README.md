@@ -21,9 +21,6 @@ Architectural diagram TO BE
 ____________________________________________________________________________
 ![arch to_be](assets/arch_to_be.jpg)
 
+[Результаты тестирования Vertica](test_db/test_vertica/result.md)
 
-Результаты тестирования Vertica:
-test_vertica/result.md
-
-Результаты тестирования ClickHouse:
-test_clickhouse/result.md
+[Результаты тестирования ClickHouse](test_db/test_clickhouse/result.md)
