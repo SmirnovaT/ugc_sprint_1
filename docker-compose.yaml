@@ -9,6 +9,20 @@ services:
     depends_on:
       - zookeeper
       - kafka
+  
+  etl-service:
+    build:
+      context: ./etl
+    env_file:
+      - ./etl/.env
+    restart: always
+    depends_on:
+      - zookeeper
+      - kafka
+      - clickhouse-node1
+      - clickhouse-node2
+      - clickhouse-node3
+      - clickhouse-node4
 
   zookeeper:
     image: bitnami/zookeeper:3.8.0
@@ -74,6 +88,7 @@ services:
       - ./data/node2:/etc/clickhouse-server
     depends_on:
       - zookeeper
+      
   clickhouse-node3:
     image: clickhouse/clickhouse-server:23
     container_name: clickhouse-node3
