@@ -4,7 +4,7 @@ import vertica_python
 
 from generator_events.generate_to_db import generate_events
 from test_vertica.config import connection_info
-from test_utils import time_it
+from test_utils.utils import time_it
 
 TOTAL = 1000
 BATCH_SIZE = 1000
