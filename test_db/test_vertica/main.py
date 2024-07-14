@@ -8,13 +8,13 @@ TOTAL = 1000
 BATCH_SIZE = 1000
 
 
-
 def create_table():
     """Создание таблицы в БД"""
     with vertica_python.connect(**connection_info) as connection:
         cursor = connection.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         CREATE TABLE IF NOT EXISTS event (
             id IDENTITY,
             type VARCHAR NOT NULL,
@@ -22,7 +22,8 @@ def create_table():
             user_id VARCHAR NOT NULL,
             fingerprint VARCHAR(256) NOT NULL,
             element VARCHAR NOT NULL,
-            url VARCHAR NOT NULL)""")
+            url VARCHAR NOT NULL)"""
+        )
 
 
 def insert_events(values):
@@ -46,12 +47,14 @@ def transform_data(event_generator):
     for batch in event_generator:
 
         values = [
-            (event['type'],
-             event['timestamp'],
-             event['user_id'],
-             event['fingerprint'],
-             event['element'],
-             event['url'])
+            (
+                event["type"],
+                event["timestamp"],
+                event["user_id"],
+                event["fingerprint"],
+                event["element"],
+                event["url"],
+            )
             for event in batch
         ]
 
