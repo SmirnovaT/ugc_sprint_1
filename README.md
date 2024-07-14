@@ -36,7 +36,7 @@ python main.py
 ```
 
 ____________________________________________________________________________
-[Результаты тестирования Vertica](test_vertica/result.md)
+[Результаты тестирования Vertica](test_db/test_vertica/result.md)
 
 [Результаты тестирования ClickHouse](test_db/test_clickhouse/result.md)
 
