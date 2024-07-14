@@ -1,14 +1,11 @@
-import time
-
 import vertica_python
 
 from generator_events.generate_to_db import generate_events
-from test_vertica.config import connection_info
-from test_utils.utils import time_it
+from test_db.test_vertica.config import connection_info
+from test_db.test_utils.utils import time_it
 
 TOTAL = 1000
 BATCH_SIZE = 1000
-
 
 
 def create_table():
@@ -16,7 +13,8 @@ def create_table():
     with vertica_python.connect(**connection_info) as connection:
         cursor = connection.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         CREATE TABLE IF NOT EXISTS event (
             id IDENTITY,
             type VARCHAR NOT NULL,
@@ -24,7 +22,8 @@ def create_table():
             user_id VARCHAR NOT NULL,
             fingerprint VARCHAR(256) NOT NULL,
             element VARCHAR NOT NULL,
-            url VARCHAR NOT NULL)""")
+            url VARCHAR NOT NULL)"""
+        )
 
 
 def insert_events(values):
@@ -48,12 +47,14 @@ def transform_data(event_generator):
     for batch in event_generator:
 
         values = [
-            (event['type'],
-             event['timestamp'],
-             event['user_id'],
-             event['fingerprint'],
-             event['element'],
-             event['url'])
+            (
+                event["type"],
+                event["timestamp"],
+                event["user_id"],
+                event["fingerprint"],
+                event["element"],
+                event["url"],
+            )
             for event in batch
         ]
 

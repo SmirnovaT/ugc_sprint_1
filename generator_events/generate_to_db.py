@@ -38,11 +38,3 @@ def generate_events(count: int, batch_size: int) -> Generator[list[dict], None, 
             yield batch
 
     return event_generator()
-
-
-# Пример использования
-event_generator = generate_events(count=10000000, batch_size=500)
-
-for event in event_generator:
-    # Код записи в БД
-    pass

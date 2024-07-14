@@ -34,6 +34,12 @@ source venv/bin/activate
 python -m pip install -r requirements.txt
 python main.py
 ```
+
+____________________________________________________________________________
+[Результаты тестирования Vertica](test_vertica/result.md)
+
+[Результаты тестирования ClickHouse](test_db/test_clickhouse/result.md)
+
 ____________________________________________________________________________
 Architectural diagram AS IS
 ____________________________________________________________________________

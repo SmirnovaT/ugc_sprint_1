@@ -22,7 +22,7 @@ LOGGING = {
         "error_console": {
             "class": "logging.StreamHandler",
             "formatter": "default",
-            "stream": "ext://sys.stderr"
+            "stream": "ext://sys.stderr",
         },
         "default": {
             "class": "logging.StreamHandler",
@@ -36,13 +36,6 @@ LOGGING = {
             "handlers": LOG_DEFAULT_HANDLERS,
             "level": "INFO",
         },
-        "gunicorn.error": {
-            "level": "INFO",
-            "handlers": ["error_console"],
-            "propagate": True,
-            "qualname": "gunicorn.error",
-        },
-        "gunicorn.access": {"level": "INFO", "handlers": ["console"], "propagate": True, "qualname": "gunicorn.access"},
     },
     "root": {
         "level": "INFO",
