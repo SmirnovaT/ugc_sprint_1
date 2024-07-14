@@ -9,7 +9,7 @@ services:
       VERTICA_USER: ${VERTICA_USER}
       VERTICA_DATABASE: ${VERTICA_DATABASE}
     ports:
-        - "5433:5433"
+        - "5400:5433"
     restart: always
 
 
