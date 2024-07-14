@@ -1,9 +1,10 @@
-import time
 import random
+import time
+
 import requests
 
 from core.config import settings
-from generator_events.events import (
+from events import (
     generate_click,
     generate_film_quality,
     generate_film_watched,
@@ -23,7 +24,9 @@ event_functions = [
 def send_event(event: dict) -> None:
     """Функция отправки сгенерированных событий в ручку '/analytics_event'"""
 
-    requests.post(settings.api_url, json=event, timeout=15)
+    response = requests.post(settings.api_url, json=event, timeout=15)
+    print(response.status_code)
+    print(response.text)
 
 
 if __name__ == "__main__":
