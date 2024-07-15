@@ -17,6 +17,7 @@ class KafkaExtractor:
             bootstrap_servers=f"{settings.host}:{settings.port}",
             auto_offset_reset="earliest",
             group_id=settings.group_id,
+            enable_auto_commit=False,
             value_deserializer=lambda m: json.loads(m.decode("utf-8")),
         )
 
@@ -36,7 +37,10 @@ class KafkaExtractor:
         await self.start()
         return self
 
-    async def __aexit__(self, *args):
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        if exc_type is None:
+            await self.consumer.commit()
+        
         await self.close()
 
     @backoff.on_exception(
