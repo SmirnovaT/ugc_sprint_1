@@ -3,14 +3,13 @@ import datetime as dt
 import logging
 from datetime import datetime, timedelta
 from typing import Tuple
+from uuid import uuid4
 
 import jwt
-
 from src.core.config import settings
 
 
-
-def calculate_current_date_and_time() -> Tuple[dt, int]:
+def calculate_current_date_and_time() -> Tuple[dt.datetime, int]:
     """Calculates current date and time"""
 
     current_date_and_time_datetime = datetime.now(dt.timezone.utc)
@@ -25,9 +24,7 @@ def calculate_iat_and_exp_tokens() -> Tuple[int, int, int]:
     """
     Calculates 'iat' and 'exp' for access and refresh tokens
     """
-    current_date_and_time_datetime, iat_timestamp = (
-        calculate_current_date_and_time()
-    )
+    current_date_and_time_datetime, iat_timestamp = calculate_current_date_and_time()
 
     exp_access_token = current_date_and_time_datetime + timedelta(minutes=15)
     exp_refresh_token = current_date_and_time_datetime + timedelta(days=10)
@@ -49,6 +46,7 @@ def create_access_and_refresh_tokens(
 
     access_token_payload = {
         "iss": "Auth service",
+        "user_id": str(uuid4()),
         "user_login": user_login,
         "user_role": user_role,
         "type": "access",
@@ -101,6 +99,5 @@ def validate_token(token: str) -> dict[str, str]:
 
     except ValueError as err:
         logging.error(f"Error while JWT decoding: {err}")
-
 
     return decoded_token
