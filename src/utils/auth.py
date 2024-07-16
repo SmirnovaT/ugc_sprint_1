@@ -2,7 +2,7 @@ from enum import Enum
 from uuid import UUID
 
 import jwt
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from core.config import settings
 
@@ -46,7 +46,7 @@ def validate_token(token):
             leeway=30,
         )
         access_token = AccessTokenPayload(**token_payload)
-    except jwt.exceptions.DecodeError:
+    except (jwt.exceptions.DecodeError, ValidationError):
         raise AuthTokenError
     if access_token.type != TokenType.ACCESS:
         raise AuthTokenWrongTypeError
