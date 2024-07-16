@@ -16,7 +16,7 @@ class EventsEnum(StrEnum):
 class BaseEvent(BaseModel):
     type: EventsEnum
     timestamp: datetime
-    user_id: UUID | None
+    user_id: UUID | None = None
     fingerprint: str
     data: dict
 

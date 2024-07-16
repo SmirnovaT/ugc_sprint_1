@@ -26,8 +26,9 @@ class EventService:
     def __init__(self, event_repo: BaseEventRepo) -> None:
         self.event_repo = event_repo
 
-    async def process_event(self, event_envelope: EventEnvelope) -> None:
+    async def process_event(self, event_envelope: EventEnvelope, user_id: str) -> None:
         base_event = event_envelope.event
+        base_event.user_id = user_id
         EventModel = EVENT_REGISTRY.get(base_event.type)
         if not EventModel:
             raise EventTypeError

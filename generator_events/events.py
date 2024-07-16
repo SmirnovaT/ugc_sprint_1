@@ -1,7 +1,6 @@
 import random
 import uuid
-
-from datetime import timezone, timedelta
+from datetime import timedelta, timezone
 
 import faker
 
@@ -17,7 +16,6 @@ def generate_event(event_type, data_dict) -> dict:
             "timestamp": fake.date_time_this_year(
                 before_now=True, after_now=False, tzinfo=timezone(timedelta(hours=3))
             ).isoformat(),
-            "user_id": str(uuid.uuid4()),
             "fingerprint": f"{fake.user_agent()} {fake.random_int(min=1000, max=9999)}x{fake.random_int(min=1000, max=9999)} UTC+3; {fake.locale()} Windows; {str(uuid.uuid4())}",
             "data": data_dict,
         }

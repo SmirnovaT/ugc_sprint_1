@@ -5,13 +5,20 @@ from flask import Flask, json
 from werkzeug.exceptions import HTTPException
 
 from services.event import EventValidationError
+from utils.auth import AuthTokenError
 
 logger = logging.getLogger(__name__)
+
 
 def handle_exceptions(e):
     """Обработка ошибок для Flask"""
 
     match e:
+        case AuthTokenError():
+            return {
+                "detail": "access token is invalid or expired"
+            }, HTTPStatus.UNAUTHORIZED
+
         case EventValidationError():
             return {"detail": e.detail}, HTTPStatus.UNPROCESSABLE_ENTITY
 

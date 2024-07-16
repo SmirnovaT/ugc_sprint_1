@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     app_port: int = 8000
     kafka: KafkaSettings
     api_url: str
+    public_key: str
+    private_key: str
+    token_algorithm: str
 
     model_config = SettingsConfigDict(
         extra="ignore",
