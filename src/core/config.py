@@ -26,6 +26,8 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         env_nested_delimiter="__",
     )
+    private_key: str = "secret"
+    public_key: str = "secret"
 
 
 settings = Settings()
