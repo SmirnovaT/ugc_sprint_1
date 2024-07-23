@@ -1,5 +1,4 @@
 [flake8]
-format = wemake
 show-source = True
 max-line-length = 88
 select = B,C,E,F,W
