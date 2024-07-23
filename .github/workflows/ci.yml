@@ -38,7 +38,7 @@ jobs:
 
       - name: Run flake8
         run: |
-          poetry run flake8 src --config=.flake8 --format=html --htmldir=reports/wemake-python-styleguide/ --exit-zero
+          poetry run flake8 src --config=.flake8 --format=html --htmldir=reports/wemake-python-styleguide/
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
