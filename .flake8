@@ -5,4 +5,3 @@ max-line-length = 88
 select = B,C,E,F,W
 ignore = W291,W293,W503,F403,C901
 exclude = .git,venv,.venv,.env_example,__pycache__
-output-file = reports/wemake-python-styleguide/report.html
